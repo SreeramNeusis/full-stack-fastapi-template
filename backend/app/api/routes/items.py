@@ -6,7 +6,6 @@ from sqlmodel import col, func, select
 
 from app.api.deps import CurrentUser, SessionDep
 from app.models import Item, ItemCreate, ItemPublic, ItemsPublic, ItemUpdate, Message
-from app.core.config import settings
 
 router = APIRouter(prefix="/items", tags=["items"])
 
@@ -18,7 +17,7 @@ def read_items(
     session: SessionDep,
     current_user: CurrentUser,
     skip: int = Query(default=0, ge=0),
-    limit: int = Query(default=100, ge=1, le=settings.MAX_PAGE_SIZE),
+    limit: int = Query(default=100, ge=1, le=MAX_LIMIT),
 ) -> Any:
     """
     Retrieve items.

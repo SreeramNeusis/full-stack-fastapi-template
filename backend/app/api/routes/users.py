@@ -34,11 +34,7 @@ router = APIRouter(prefix="/users", tags=["users"])
     dependencies=[Depends(get_current_active_superuser)],
     response_model=UsersPublic,
 )
-def read_users(
-    session: SessionDep,
-    skip: int = Query(default=0, ge=0),
-    limit: int = Query(default=100, ge=1, le=settings.MAX_PAGE_SIZE),
-) -> Any:
+def read_users(session: SessionDep, skip: int = Query(default=0, ge=0), limit: int = Query(default=100, ge=1, le=100)) -> Any:
     """
     Retrieve users.
     """
